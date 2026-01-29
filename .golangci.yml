@@ -1,0 +1,164 @@
+# golangci-lint configuration for docker-network-viz
+# https://golangci-lint.run/usage/configuration/
+
+run:
+  # Timeout for analysis
+  timeout: 5m
+
+  # Include test files
+  tests: true
+
+output:
+  # Sort results by file, line, and column
+  sort-results: true
+
+linters:
+  # Disable all linters, then enable specific ones
+  disable-all: true
+
+  enable:
+    # Default linters
+    - errcheck      # Check for unchecked errors
+    - gosimple      # Simplify code
+    - govet         # Report suspicious constructs
+    - ineffassign   # Detect ineffective assignments
+    - staticcheck   # Go static analysis
+    - unused        # Check for unused code
+
+    # Additional recommended linters
+    - bodyclose     # Check HTTP response body is closed
+    - dogsled       # Check for too many blank identifiers
+    - dupl          # Check for code duplication
+    - goconst       # Find repeated strings that could be constants
+    - gocritic      # Comprehensive Go linter
+    - gofmt         # Check formatting
+    - goimports     # Check imports
+    - goprintffuncname # Check printf-like function names
+    - gosec         # Security checks
+    - misspell      # Find misspelled words
+    - nakedret      # Find naked returns in long functions
+    - noctx         # Check for http requests without context
+    - nolintlint    # Check nolint directives
+    - prealloc      # Find slice declarations that could be preallocated
+    - revive        # Fast, configurable linter
+    - rowserrcheck  # Check sql.Rows.Err is checked
+    - stylecheck    # Style checks
+    - unconvert     # Remove unnecessary type conversions
+    - whitespace    # Check for leading/trailing whitespace
+
+linters-settings:
+  errcheck:
+    # Check type assertions
+    check-type-assertions: true
+    # Check blank assignments - disabled to allow intentional blank assignments
+    check-blank: false
+
+  govet:
+    # Enable all analyzers
+    enable-all: true
+    disable:
+      - fieldalignment # Too strict for most cases
+
+  gocyclo:
+    # Minimal code complexity to report
+    min-complexity: 15
+
+  goconst:
+    # Minimal length of string constant
+    min-len: 3
+    # Minimal occurrences count to trigger
+    min-occurrences: 3
+
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - style
+    disabled-checks:
+      - whyNoLint # Allow nolint without explanation in some cases
+      - hugeParam # Allow large parameters for simple data structures
+      - rangeValCopy # Allow copying in range for clarity
+
+  goimports:
+    # Put local imports after 3rd-party
+    local-prefixes: git.o.ocom.com.au/go/docker-network-viz
+
+  revive:
+    rules:
+      - name: blank-imports
+      - name: context-as-argument
+      - name: context-keys-type
+      - name: dot-imports
+      - name: error-return
+      - name: error-strings
+      - name: error-naming
+      - name: exported
+      - name: increment-decrement
+      - name: indent-error-flow
+      - name: package-comments
+      - name: range
+      - name: receiver-naming
+      - name: time-naming
+      - name: unexported-return
+      - name: var-declaration
+      - name: var-naming
+
+  stylecheck:
+    checks:
+      - "all"
+      - "-ST1000" # Package comments not required
+
+  gosec:
+    excludes:
+      - G104 # Audit errors not checked (handled by errcheck)
+
+  nakedret:
+    # Naked returns allowed for functions with body size <= 5 lines
+    max-func-lines: 5
+
+  misspell:
+    locale: US
+
+  dupl:
+    # Tokens count to trigger issue
+    threshold: 150
+
+issues:
+  # Which dirs to skip
+  exclude-dirs:
+    - vendor
+    - dist
+    - bin
+
+  # Maximum issues count per one linter
+  max-issues-per-linter: 50
+
+  # Maximum count of issues with the same text
+  max-same-issues: 10
+
+  # Show only new issues when using golangci-lint in CI
+  new: false
+
+  # Fix found issues (if supported by linter)
+  fix: false
+
+  exclude-rules:
+    # Exclude some linters from running on tests
+    - path: _test\.go
+      linters:
+        - dupl
+        - gosec
+        - goconst
+
+    # Exclude shadow checking in test files
+    - path: _test\.go
+      text: "shadows outer"
+
+    # Allow package comments to be missing in cmd packages
+    - path: cmd/
+      linters:
+        - revive
+      text: "package-comments"
+
+    # Allow octal literals in test files (for file permissions)
+    - path: _test\.go
+      text: "octalLiteral"
