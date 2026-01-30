@@ -22,7 +22,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build \
     -ldflags='-w -s -extldflags "-static"' \
     -a \
     -o docker-network-viz \
-    ./cmd/docker-network-viz/
+    .
 
 # Stage 2: Create minimal runtime image
 FROM alpine:latest

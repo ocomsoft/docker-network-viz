@@ -16,7 +16,7 @@ The tool provides colored output for better readability when run in a terminal a
 ### Using go install
 
 ```bash
-go install git.o.ocom.com.au/go/docker-network-viz/cmd/docker-network-viz@latest
+go install git.o.ocom.com.au/go/docker-network-viz@latest
 ```
 
 ### Build from source

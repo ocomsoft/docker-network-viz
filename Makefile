@@ -16,7 +16,7 @@ GOMOD := $(GOCMD) mod
 GOFMT := goimports
 
 # Main package path
-MAIN_PKG := ./cmd/docker-network-viz
+MAIN_PKG := .
 
 # Installation directories
 USER_PLUGIN_DIR := $(HOME)/.docker/cli-plugins

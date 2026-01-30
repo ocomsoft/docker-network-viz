@@ -32,7 +32,7 @@ All tests pass with pristine output (no warnings, no errors):
 
 | Package | Tests | Coverage |
 |---------|-------|----------|
-| cmd/docker-network-viz | 20 | 62.1% |
+| cmd | 20 | 62.1% |
 | internal/docker | 30 | 93.5% |
 | internal/models | 14 | 100.0% |
 | internal/output | 44 | 98.7% |
@@ -92,9 +92,9 @@ All source files have proper documentation:
 | internal/output/reachability.go | Yes | All documented |
 | internal/output/color.go | Yes | All documented |
 | internal/output/tree_symbols.go | Yes | All documented |
-| cmd/docker-network-viz/root.go | Yes | All documented |
-| cmd/docker-network-viz/visualize.go | Yes | All documented |
-| cmd/docker-network-viz/main.go | Yes | All documented |
+| cmd/root.go | Yes | All documented |
+| cmd/visualize.go | Yes | All documented |
+| main.go | Yes | All documented |
 
 Markdown documentation files:
 - README.md (project overview)
@@ -102,8 +102,8 @@ Markdown documentation files:
 - Makefile.md (build system docs)
 - PRD.md (product requirements)
 - .golangci.md (linter configuration)
-- cmd/docker-network-viz/README.md
-- cmd/docker-network-viz/main.md
+- cmd/README.md
+- cmd/main.md
 - internal/docker/README.md
 - internal/output/README.md
 - internal/models/container.md

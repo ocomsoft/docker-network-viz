@@ -212,8 +212,8 @@ This runs formatting, linting, and all tests.
 
 ```
 docker-network-viz/
-├── cmd/docker-network-viz/    # CLI commands (one file per command)
-│   ├── main.go                # Entry point
+├── main.go                    # Entry point
+├── cmd/                       # CLI commands (one file per command)
 │   ├── root.go                # Root command with global flags
 │   └── visualize.go           # Visualize command
 ├── internal/
@@ -254,7 +254,7 @@ Do not add new dependencies without discussion.
 
 ### Adding a New Command
 
-1. Create a new file in `cmd/docker-network-viz/` (e.g., `newcmd.go`)
+1. Create a new file in `cmd/` (e.g., `newcmd.go`)
 2. Define the command with Cobra
 3. Register flags with Viper
 4. Add the command to root in `init()`

@@ -10,7 +10,7 @@ import (
 
 // TestCLI_HelpCommand tests the --help flag output.
 func TestCLI_HelpCommand(t *testing.T) {
-	cmd := exec.Command("go", "run", "../cmd/docker-network-viz", "--help")
+	cmd := exec.Command("go", "run", "..", "--help")
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
@@ -38,7 +38,7 @@ func TestCLI_HelpCommand(t *testing.T) {
 
 // TestCLI_VisualizeHelpCommand tests the visualize --help flag output.
 func TestCLI_VisualizeHelpCommand(t *testing.T) {
-	cmd := exec.Command("go", "run", "../cmd/docker-network-viz", "visualize", "--help")
+	cmd := exec.Command("go", "run", "..", "visualize", "--help")
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
@@ -67,7 +67,7 @@ func TestCLI_VisualizeHelpCommand(t *testing.T) {
 
 // TestCLI_UnknownFlag tests that unknown flags produce an error.
 func TestCLI_UnknownFlag(t *testing.T) {
-	cmd := exec.Command("go", "run", "../cmd/docker-network-viz", "--unknown-flag")
+	cmd := exec.Command("go", "run", "..", "--unknown-flag")
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
@@ -86,7 +86,7 @@ func TestCLI_UnknownFlag(t *testing.T) {
 
 // TestCLI_InvalidConfigFile tests behavior with non-existent config file.
 func TestCLI_InvalidConfigFile(t *testing.T) {
-	cmd := exec.Command("go", "run", "../cmd/docker-network-viz", "--config", "/nonexistent/config.yaml", "--help")
+	cmd := exec.Command("go", "run", "..", "--config", "/nonexistent/config.yaml", "--help")
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
@@ -100,7 +100,7 @@ func TestCLI_InvalidConfigFile(t *testing.T) {
 
 // TestCLI_NoColorFlag tests that --no-color flag is accepted.
 func TestCLI_NoColorFlag(t *testing.T) {
-	cmd := exec.Command("go", "run", "../cmd/docker-network-viz", "--no-color", "--help")
+	cmd := exec.Command("go", "run", "..", "--no-color", "--help")
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
@@ -137,7 +137,7 @@ func TestCLI_VisualizeFlags(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			args := append([]string{"run", "../cmd/docker-network-viz"}, tc.args...)
+			args := append([]string{"run", ".."}, tc.args...)
 			cmd := exec.Command("go", args...)
 			var stdout, stderr bytes.Buffer
 			cmd.Stdout = &stdout
@@ -174,7 +174,7 @@ func TestCLI_RootFlagsPassthrough(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			args := append([]string{"run", "../cmd/docker-network-viz"}, tc.args...)
+			args := append([]string{"run", ".."}, tc.args...)
 			cmd := exec.Command("go", args...)
 			var stdout, stderr bytes.Buffer
 			cmd.Stdout = &stdout
