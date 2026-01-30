@@ -62,6 +62,36 @@ cp docker-network-viz ~/.docker/cli-plugins/
 docker network-viz
 ```
 
+### Using Docker
+
+Build and run using Docker (see [DOCKER.md](DOCKER.md) for detailed Docker usage):
+
+```bash
+# Build the Docker image
+./docker-build.sh
+
+# Run with Docker
+./docker-run.sh
+
+# Or manually
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock docker-network-viz:latest
+
+# With flags
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock docker-network-viz:latest --no-color
+```
+
+**Note**: The Docker socket must be mounted to access the Docker daemon. If you encounter permission errors, see the [Docker troubleshooting guide](DOCKER.md#troubleshooting).
+
+### Quick Demo
+
+To see the tool in action with sample containers:
+
+```bash
+./docker-demo.sh
+```
+
+This will create demo networks and containers to visualize.
+
 ## Usage
 
 The tool can be run directly without any subcommands to display the full network visualization:

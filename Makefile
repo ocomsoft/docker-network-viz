@@ -123,3 +123,16 @@ cover:
 ## check: Run all checks (fmt, lint, test)
 check: fmt lint test
 	@echo "All checks passed."
+
+## docker-build: Build Docker image
+docker-build:
+	@./docker-build.sh
+
+## docker-run: Run Docker container
+docker-run:
+	@./docker-run.sh
+
+## docker-test: Build and test Docker image
+docker-test: docker-build
+	@echo "Testing Docker image..."
+	@docker run --rm -v /var/run/docker.sock:/var/run/docker.sock $(BINARY_NAME):latest --help
